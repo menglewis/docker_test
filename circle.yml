@@ -1,0 +1,11 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t menglewis/docker_test .
+
+test:
+  override:
+    - docker run menglewis/docker_test /bin/bash -c "echo BUILDS OK"
