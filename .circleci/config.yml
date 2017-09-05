@@ -11,7 +11,7 @@ jobs:
         command: |
           docker build -t menglewis/docker_test .
           docker run menglewis/docker_test /bin/bash -c "echo BUILD OK"
-      - run:
+      - deploy:
         name: Deploy Docker Image
         command: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
