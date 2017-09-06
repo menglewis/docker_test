@@ -7,14 +7,14 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-        name: Build Docker Image
-        command: |
-          docker build -t menglewis/docker_test .
-          docker run menglewis/docker_test /bin/bash -c "echo BUILD OK"
+          name: Build Docker Image
+          command: |
+            docker build -t menglewis/docker_test .
+            docker run menglewis/docker_test /bin/bash -c "echo BUILD OK"
       - deploy:
-        name: Deploy Docker Image
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            docker images
-            pip freeze
-          fi
+          name: Deploy Docker Image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker images
+              pip freeze
+            fi
