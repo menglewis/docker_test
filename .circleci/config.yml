@@ -30,12 +30,12 @@ jobs:
           keys:
             - requirements-{{ .Revision }}
       - deploy:
-        name: Create Github Release
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            echo "Releasing..."
-            cat requirements.txt
-          fi
+          name: Create Github Release
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "Releasing..."
+              cat requirements.txt
+            fi
 
 workflows:
   version: 2
