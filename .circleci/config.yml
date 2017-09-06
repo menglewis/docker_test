@@ -16,4 +16,4 @@ jobs:
           command: |
             docker run menglewis/docker_test /bin/bash -c "pip freeze" > requirements.txt
       - store_artifacts:
-        path: requirements.txt
+          path: requirements.txt
