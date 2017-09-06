@@ -23,7 +23,7 @@ jobs:
             - requirements.txt
   show_req:
     docker:
-      - image: circleci/python3.5
+      - image: circleci/python:3.5
     steps:
       - checkout
       - restore_cache:
