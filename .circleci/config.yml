@@ -29,11 +29,14 @@ jobs:
       - restore_cache:
           keys:
             - requirements-{{ .Revision }}
+      - run:
+          name: Install ghr
+          command: |
+            go get github.com/tcnksm/ghr
       - deploy:
           name: Create Github Release
           command: |
-            echo "Releasing..."
-            cat requirements.txt
+            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` requirements.txt
 
 workflows:
   version: 2
