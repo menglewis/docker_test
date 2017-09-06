@@ -16,4 +16,4 @@ deployment:
     commands:
       - go get github.com/tcnksm/ghr
       - docker run menglewis/docker_test /bin/bash -c "pip freeze" > requirements.txt
-      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME -replace $CIRCLE_TAG requirements.txt
+      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $CIRCLE_TAG requirements.txt
