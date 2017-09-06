@@ -36,9 +36,7 @@ jobs:
       - deploy:
           name: Create Github Release
           command: |
-            git describe --tags
-            ls
-            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME -replace `git describe --tags` requirements.txt
+            ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME -replace $CIRCLE_TAG requirements.txt
 
 workflows:
   version: 2
