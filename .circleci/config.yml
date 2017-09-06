@@ -54,7 +54,7 @@ workflows:
             - build
       - release:
           requires:
-            - build_package_list
+            - show_req
           filters:
             tags:
               only: /(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/
