@@ -21,27 +21,20 @@ jobs:
           key: requirements-{{ .Revision }}
           paths:
             - requirements.txt
-  show_req:
-    docker:
-      - image: circleci/python:3.5
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - requirements-{{ .Revision }}
-      - run:
-          name: Print Package List
-          command: |
-            cat requirements.txt
   release:
     docker:
       - image: circleci/python:3.5
     steps:
+      -checkout
+      - restore_cache:
+          keys:
+            - requirements-{{ .Revision }}
       - deploy:
         name: Create Github Release
         command: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
             echo "Releasing..."
+            cat requirements.txt
           fi
 
 workflows:
@@ -49,12 +42,9 @@ workflows:
   build_and_release:
     jobs:
       - build
-      - show_req:
-          requires:
-            - build
       - release:
           requires:
-            - show_req
+            - build
           filters:
             tags:
               only: /(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/
