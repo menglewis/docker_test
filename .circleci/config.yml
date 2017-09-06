@@ -38,13 +38,13 @@ workflows:
     jobs:
       - build
       - build_package_list
-        requires:
-          - build
+          requires:
+            - build
       - release
-        requires:
-          - build_package_list
-        filters:
-          tags:
-            only: /(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/
-          branches:
-            ignore: /.*/
+          requires:
+            - build_package_list
+          filters:
+            tags:
+              only: /(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)/
+            branches:
+              ignore: /.*/
