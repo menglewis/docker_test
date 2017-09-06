@@ -11,18 +11,28 @@ jobs:
           command: |
             docker build -t menglewis/docker_test .
             docker run menglewis/docker_test /bin/bash -c "echo BUILD OK"
-  build_package_list:
-    docker:
-      - image: circleci/python:3.5
-    steps:
-      - checkout
-      - setup_remote_docker
       - run:
           name: Build Package List
           command: |
             docker run menglewis/docker_test /bin/bash -c "pip freeze" > requirements.txt
       - store_artifacts:
           path: requirements.txt
+      - save_cache:
+          key: requirements-{{ .BuildNum }}
+          paths:
+            - requirements.txt
+  show_req:
+    docker:
+      - image: circleci/python3.5
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - requirements-{{ .BuildNum }}
+      - run:
+          name: Print Package List
+          command: |
+            cat requirements.txt
   release:
     docker:
       - image: circleci/python:3.5
@@ -39,7 +49,7 @@ workflows:
   build_and_release:
     jobs:
       - build
-      - build_package_list:
+      - show_req:
           requires:
             - build
       - release:
