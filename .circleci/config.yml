@@ -11,10 +11,9 @@ jobs:
           command: |
             docker build -t menglewis/docker_test .
             docker run menglewis/docker_test /bin/bash -c "echo BUILD OK"
-      - deploy:
-          name: Deploy Docker Image
+      - run:
+          name: Build Package List
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker images
-              pip freeze
-            fi
+            docker run menglewis/docker_test /bin/bash -c "pip freeze" > requirements.txt
+      - store_artifacts:
+        path: requirements.txt
