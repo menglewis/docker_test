@@ -37,10 +37,10 @@ workflows:
   build_and_release:
     jobs:
       - build
-      - build_package_list
+      - build_package_list:
           requires:
             - build
-      - release
+      - release:
           requires:
             - build_package_list
           filters:
