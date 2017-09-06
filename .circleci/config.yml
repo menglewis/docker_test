@@ -32,10 +32,8 @@ jobs:
       - deploy:
           name: Create Github Release
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "Releasing..."
-              cat requirements.txt
-            fi
+            echo "Releasing..."
+            cat requirements.txt
 
 workflows:
   version: 2
