@@ -43,7 +43,8 @@ workflows:
     jobs:
       - build:
           filters:
-            tags: /.*/
+            tags:
+              only: /.*/
       - release:
           requires:
             - build
