@@ -1,0 +1,19 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t menglewis/docker_test .
+
+test:
+  override:
+    - docker run menglewis/docker_test /bin/bash -c "echo BUILDS OK"
+
+deployment:
+  release:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    commands:
+      - go get github.com/tcnksm/ghr
+      - docker run menglewis/docker_test /bin/bash -c "pip freeze" > requirements.txt
+      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME -replace $CIRCLE_TAG requirements.txt
