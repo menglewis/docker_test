@@ -18,7 +18,7 @@ jobs:
       - store_artifacts:
           path: requirements.txt
       - save_cache:
-          key: requirements-{{ .BuildNum }}
+          key: requirements-{{ .Revision }}
           paths:
             - requirements.txt
   show_req:
@@ -28,7 +28,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - requirements-{{ .BuildNum }}
+            - requirements-{{ .Revision }}
       - run:
           name: Print Package List
           command: |
