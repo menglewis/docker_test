@@ -15,7 +15,6 @@ deployment:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
       - go get github.com/tcnksm/ghr
-      - docker run menglewis/docker_test /bin/bash -c "pip freeze" > requirements.txt
-      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $CIRCLE_TAG requirements.txt
-    artifacts:
-      - "requirements.txt"
+      - docker run menglewis/docker_test /bin/bash -c "pip freeze" > $CIRCLE_ARTIFACTS/requirements.txt
+      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME $CIRCLE_TAG $CIRCLE_ARTIFACTS/requirements.txt
+
